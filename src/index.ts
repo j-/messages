@@ -6,7 +6,7 @@ async function main () {
 	const node: Partial<INode> = {};
 	const action = new ActionCreateNode(node);
 	const result = await execute(action);
-	console.log(result.id);
+	console.log(result);
 }
 
 main();

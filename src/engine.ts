@@ -12,11 +12,11 @@ import {
 export async function execute (action: ActionCreateNode): Promise<INode>;
 export async function execute (action: IAction): Promise<any> {
 	if (action instanceof ActionCreateNode) {
-		const partialNode = action.node;
 		const node: INode = {
-			...partialNode,
+			...action.node,
 			id: uuid(),
-		}
+			dateCreated: Date.now(),
+		};
 		return node;
 	} else {
 		throw new Error('Unrecognised action');
