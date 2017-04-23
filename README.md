@@ -27,6 +27,12 @@ $ npm run build
 $ npm start
 ```
 
+## Docs
+
+```sh
+$ npm run docs
+```
+
 ## License
 
 MIT.

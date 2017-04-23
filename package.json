@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
+    "docs": "typedoc --out docs/ && touch docs/.nojekyll",
     "lint": "tslint src/**/*.ts",
     "start": "node dist/index.js",
     "test": "npm run lint"
@@ -22,6 +23,7 @@
   "devDependencies": {
     "@types/node": "^7.0.13",
     "tslint": "^5.1.0",
+    "typedoc": "^0.5.10",
     "typescript": "^2.2.2"
   }
 }
