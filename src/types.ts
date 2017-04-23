@@ -1,4 +1,4 @@
-export type UUID = string
+export type UUID = string;
 
 export interface IIndexed {
 	id: UUID;
