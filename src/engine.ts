@@ -1,3 +1,5 @@
+import { v4 as uuid } from 'uuid';
+
 import {
 	IAction,
 	ActionCreateNode,
@@ -13,7 +15,7 @@ export async function execute (action: IAction): Promise<any> {
 		const partialNode = action.node;
 		const node: INode = {
 			...partialNode,
-			id: '5bc70a70-3315-46b9-a280-30144087eaca',
+			id: uuid(),
 		}
 		return node;
 	} else {

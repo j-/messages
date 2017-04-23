@@ -25,5 +25,9 @@
     "tslint": "^5.1.0",
     "typedoc": "^0.5.10",
     "typescript": "^2.2.2"
+  },
+  "dependencies": {
+    "@types/uuid": "^2.0.29",
+    "uuid": "^3.0.1"
   }
 }
