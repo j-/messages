@@ -22,12 +22,12 @@
   "homepage": "https://github.com/j-/messages#readme",
   "devDependencies": {
     "@types/node": "^7.0.13",
-    "@types/uuid": "^2.0.29",
+    "@types/uuid": "2.0.29",
     "tslint": "^5.1.0",
     "typedoc": "^0.5.10",
     "typescript": "^2.2.2"
   },
   "dependencies": {
-    "uuid": "^3.0.1"
+    "uuid": "2.0.29"
   }
 }
