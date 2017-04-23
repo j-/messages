@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/j-/messages#readme",
   "devDependencies": {
+    "@types/node": "^7.0.13",
     "typescript": "^2.2.2"
   }
 }
