@@ -2,8 +2,8 @@ import { v4 as uuid } from 'uuid';
 
 import {
 	IAction,
-	ActionCreateNode,
-	ActionCreateMessage,
+	IActionCreateNode,
+	IActionCreateMessage,
 } from './actions';
 
 import {
@@ -14,19 +14,19 @@ import {
 	IMessage,
 } from './message';
 
-export async function execute (action: ActionCreateNode): Promise<INode>;
-export async function execute (action: ActionCreateMessage): Promise<IMessage>;
+export async function execute (action: IActionCreateNode): Promise<INode>;
+export async function execute (action: IActionCreateMessage): Promise<IMessage>;
 export async function execute (action: IAction): Promise<any> {
-	if (action instanceof ActionCreateNode) {
+	if (action.type ===  'CreateNode') {
 		const node: INode = {
-			...action.node,
+			...(<IActionCreateNode>action).node,
 			id: uuid(),
 			dateCreated: Date.now(),
 		};
 		return node;
-	} else if (action instanceof ActionCreateMessage) {
+	} else if (action.type ===  'CreateMessage') {
 		const message: IMessage = {
-			...action.message,
+			...(<IActionCreateMessage>action).message,
 			id: uuid(),
 			dateCreated: Date.now(),
 		};

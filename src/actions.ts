@@ -6,16 +6,16 @@ import {
 	IMessage,
 } from './message';
 
-export interface IAction {}
-
-export class ActionCreateNode implements IAction {
-	constructor (
-		public readonly node: Partial<INode>,
-	) {}
+export interface IAction {
+	type: string;
 }
 
-export class ActionCreateMessage implements IAction {
-	constructor (
-		public readonly message: Partial<IMessage>,
-	) {}
+export interface IActionCreateNode extends IAction {
+	type: 'CreateNode';
+	node: Partial<INode>;
+}
+
+export interface IActionCreateMessage extends IAction {
+	type: 'CreateMessage';
+	message: Partial<IMessage>;
 }
