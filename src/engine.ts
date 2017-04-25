@@ -18,10 +18,12 @@ export async function execute (action: IActionCreateNode): Promise<INode>;
 export async function execute (action: IActionCreateMessage): Promise<IMessage>;
 export async function execute (action: IAction): Promise<any> {
 	if (action.type ===  'CreateNode') {
+		const partialNode = (<IActionCreateNode>action).node;
 		const node: INode = {
-			...(<IActionCreateNode>action).node,
+			type: partialNode.type,
 			id: uuid(),
 			dateCreated: Date.now(),
+			...partialNode,
 		};
 		return node;
 	} else if (action.type ===  'CreateMessage') {
