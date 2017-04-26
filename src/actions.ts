@@ -1,4 +1,8 @@
 import {
+	UUID,
+} from './types';
+
+import {
 	INode,
 } from './node';
 
@@ -34,4 +38,13 @@ export interface IActionGetNodes extends IAction {
 
 export function isGetNodesAction (action: IAction): action is IActionGetNodes {
 	return action.type === 'GetNodes';
+}
+
+export interface IActionCatMessages extends IAction {
+	type: 'CatMessages';
+	nodeId: UUID;
+}
+
+export function isCatMessagesAction (action: IAction): action is IActionCatMessages {
+	return action.type === 'CatMessages';
 }
