@@ -9,5 +9,5 @@ import {
 } from '../node';
 
 export async function executeGetNodes (action: IActionGetNodes): Promise<INode[]> {
-	return db.select('id').table('nodes');
+	return db.select('id').table('node');
 }
