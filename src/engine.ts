@@ -31,10 +31,10 @@ export async function execute (action: IAction): Promise<any> {
 export async function executeCreateNode (action: IActionCreateNode): Promise<INode> {
 	const partialNode = action.node;
 	const node: INode = {
+		...partialNode,
 		type: partialNode.type,
 		id: uuid(),
 		dateCreated: Date.now(),
-		...partialNode,
 	};
 	return node;
 }
