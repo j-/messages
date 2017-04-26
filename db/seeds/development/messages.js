@@ -11,6 +11,10 @@ const DATA = [
 		id: 'cbe91a28-70a8-4878-8449-daaef3141d3e',
 		title: 'Hello world',
 		body: 'This is the first message',
+		data: JSON.stringify({
+			foo: 'bar',
+			hello: 'world',
+		}),
 		date_created: 1493212879111,
 	},
 	{
