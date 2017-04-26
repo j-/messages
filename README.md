@@ -55,6 +55,12 @@ $ npm run make-migration
 
 Creates a new migration file in `db/migrations`.
 
+### Seed database
+
+```sh
+$ npm run seed
+```
+
 ## License
 
 MIT.
