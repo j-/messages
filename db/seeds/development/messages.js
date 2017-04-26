@@ -4,7 +4,7 @@ exports.seed = function (knex) {
 	});
 };
 
-const TABLE = 'messages';
+const TABLE = 'message';
 
 const DATA = [
 	{
