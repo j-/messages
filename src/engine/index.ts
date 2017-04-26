@@ -6,15 +6,15 @@ import {
 	isCreateNodeAction,
 	IActionCreateMessage,
 	isCreateMessageAction,
-} from './actions';
+} from '../actions';
 
 import {
 	INode,
-} from './node';
+} from '../node';
 
 import {
 	IMessage,
-} from './message';
+} from '../message';
 
 export async function execute (action: IActionCreateNode): Promise<INode>;
 export async function execute (action: IActionCreateMessage): Promise<IMessage>;
