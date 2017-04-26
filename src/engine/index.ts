@@ -16,6 +16,9 @@ import {
 	IMessage,
 } from '../message';
 
+import { executeCreateNode } from './create-node';
+import { executeCreateMessage } from './create-message';
+
 export async function execute (action: IActionCreateNode): Promise<INode>;
 export async function execute (action: IActionCreateMessage): Promise<IMessage>;
 export async function execute (action: IAction): Promise<any> {
@@ -26,35 +29,4 @@ export async function execute (action: IAction): Promise<any> {
 	} else {
 		throw new Error('Unrecognised action');
 	}
-}
-
-export async function executeCreateNode (action: IActionCreateNode): Promise<INode> {
-	const partialNode = action.node;
-	if (partialNode.id) {
-		throw new Error('Cannot create a node that already has an ID');
-	} else if (partialNode.dateCreated) {
-		throw new Error('Cannot create a node that already has a created date');
-	}
-	const node: INode = {
-		...partialNode,
-		type: partialNode.type,
-		id: uuid(),
-		dateCreated: Date.now(),
-	};
-	return node;
-}
-
-export async function executeCreateMessage (action: IActionCreateMessage): Promise<IMessage> {
-	const partialMessage = action.message;
-	if (partialMessage.id) {
-		throw new Error('Cannot create a message that already has an ID');
-	} else if (partialMessage.dateCreated) {
-		throw new Error('Cannot create a message that already has a created date');
-	}
-	const message: IMessage = {
-		...partialMessage,
-		id: uuid(),
-		dateCreated: Date.now(),
-	};
-	return message;
 }
