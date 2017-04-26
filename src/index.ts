@@ -1,18 +1,20 @@
-import { IActionCreateMessage } from './actions';
+import { destroy } from './connection';
+import { IActionGetNodes } from './actions';
 import { IMessage } from './message';
 import { execute } from './engine';
 
 async function main () {
-	const message: Partial<IMessage> = {
-		title: 'Hello world',
-		body: 'This is an example message',
+	const action: IActionGetNodes = {
+		type: 'GetNodes',
 	};
-	const action: IActionCreateMessage = {
-		type: 'CreateMessage',
-		message,
-	};
-	const result = await execute(action);
-	console.log(result);
+	try {
+		const result = await execute(action);
+		console.log(result);
+		await destroy();
+	} catch (err) {
+		console.error(err.message);
+		process.exit(1);
+	}
 }
 
 main();

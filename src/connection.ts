@@ -6,3 +6,7 @@ const env = process.env.NODE_ENV || 'development';
 const config = knexfile[env];
 
 export const db = knex(config);
+
+export function destroy () {
+	return Promise.resolve<void>(db.destroy());
+}

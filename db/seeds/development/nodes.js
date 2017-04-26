@@ -1,6 +1,6 @@
-exports.seed = function (knex, Promise) {
+exports.seed = function (knex) {
 	return knex(TABLE).del().then(function () {
-		return knex.batchInsert(TABLE, DATA);
+		return knex(TABLE).insert(DATA);
 	});
 };
 

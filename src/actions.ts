@@ -27,3 +27,11 @@ export interface IActionCreateMessage extends IAction {
 export function isCreateMessageAction (action: IAction): action is IActionCreateMessage {
 	return action.type === 'CreateMessage';
 }
+
+export interface IActionGetNodes extends IAction {
+	type: 'GetNodes';
+}
+
+export function isGetNodesAction (action: IAction): action is IActionGetNodes {
+	return action.type === 'GetNodes';
+}
