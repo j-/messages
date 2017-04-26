@@ -12,7 +12,7 @@ export async function executeCatMessages (action: IActionCatMessages): Promise<I
 	return db('message')
 		.join('node_messages', 'message.id', '=', 'node_messages.message_id')
 		.join('node_cat', 'node_cat.input_node_id', '=', 'node_messages.node_id')
-		.where('node_cat.output_node_id', '=', action.nodeId)
+		.where('node_cat.output_node_id', 'in', action.nodeIds)
 		.select([
 			'message.id',
 			'message.title',

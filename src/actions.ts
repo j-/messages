@@ -42,7 +42,7 @@ export function isGetNodesAction (action: IAction): action is IActionGetNodes {
 
 export interface IActionCatMessages extends IAction {
 	type: 'CatMessages';
-	nodeId: UUID;
+	nodeIds: UUID[];
 }
 
 export function isCatMessagesAction (action: IAction): action is IActionCatMessages {

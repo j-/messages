@@ -6,7 +6,7 @@ import { execute } from './engine';
 async function main () {
 	const action: IActionCatMessages = {
 		type: 'CatMessages',
-		nodeId: '99e0c2cb-0d46-49aa-afe2-898f0f5af337',
+		nodeIds: ['99e0c2cb-0d46-49aa-afe2-898f0f5af337'],
 	};
 	try {
 		const result = await execute(action);
