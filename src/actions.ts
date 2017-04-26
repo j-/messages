@@ -15,7 +15,15 @@ export interface IActionCreateNode extends IAction {
 	node: Partial<INode>;
 }
 
+export function isCreateNodeAction (action: IAction): action is IActionCreateNode {
+	return action.type === 'CreateNode';
+}
+
 export interface IActionCreateMessage extends IAction {
 	type: 'CreateMessage';
 	message: Partial<IMessage>;
+}
+
+export function isCreateMessageAction (action: IAction): action is IActionCreateMessage {
+	return action.type === 'CreateMessage';
 }

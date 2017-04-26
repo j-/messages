@@ -3,7 +3,9 @@ import { v4 as uuid } from 'uuid';
 import {
 	IAction,
 	IActionCreateNode,
+	isCreateNodeAction,
 	IActionCreateMessage,
+	isCreateMessageAction,
 } from './actions';
 
 import {
@@ -17,8 +19,8 @@ import {
 export async function execute (action: IActionCreateNode): Promise<INode>;
 export async function execute (action: IActionCreateMessage): Promise<IMessage>;
 export async function execute (action: IAction): Promise<any> {
-	if (action.type ===  'CreateNode') {
-		const partialNode = (<IActionCreateNode>action).node;
+	if (isCreateNodeAction(action)) {
+		const partialNode = action.node;
 		const node: INode = {
 			type: partialNode.type,
 			id: uuid(),
@@ -26,9 +28,9 @@ export async function execute (action: IAction): Promise<any> {
 			...partialNode,
 		};
 		return node;
-	} else if (action.type ===  'CreateMessage') {
+	} else if (isCreateMessageAction(action)) {
 		const message: IMessage = {
-			...(<IActionCreateMessage>action).message,
+			...action.message,
 			id: uuid(),
 			dateCreated: Date.now(),
 		};
