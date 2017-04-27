@@ -26,6 +26,7 @@ export function isCreateNodeAction (action: IAction): action is IActionCreateNod
 export interface IActionCreateMessage extends IAction {
 	type: 'CreateMessage';
 	message: Partial<IMessage>;
+	nodeId: UUID;
 }
 
 export function isCreateMessageAction (action: IAction): action is IActionCreateMessage {

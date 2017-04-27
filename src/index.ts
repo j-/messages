@@ -1,12 +1,16 @@
 import { destroy } from './connection';
-import { IActionCatMessages } from './actions';
+import { IActionCreateMessage } from './actions';
 import { IMessage } from './message';
 import { execute } from './engine';
 
 async function main () {
-	const action: IActionCatMessages = {
-		type: 'CatMessages',
-		nodeIds: ['99e0c2cb-0d46-49aa-afe2-898f0f5af337'],
+	const action: IActionCreateMessage = {
+		type: 'CreateMessage',
+		message: {
+			title: 'Second message',
+			body: 'Being inserted into database',
+		},
+		nodeId: '8c5c1e89-b523-4e2d-93c4-274f1c4baa6f',
 	};
 	try {
 		const result = await execute(action);
