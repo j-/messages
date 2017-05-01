@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/j-/messages#readme",
   "devDependencies": {
-    "@types/knex": "0.12",
+    "@types/knex": "^0.0.47",
     "@types/node": "^7.0.13",
     "@types/uuid": "^2.0.29",
     "tslint": "^5.1.0",
