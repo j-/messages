@@ -4,8 +4,13 @@ import {
 	ITimestamps,
 } from './types';
 
+export type NodeType = (
+	'ReadNode' |
+	'CatNode'
+);
+
 export interface INode extends IIndexed, ITimestamps {
-	type: string;
+	type: NodeType;
 }
 
 export interface IReadNode extends INode {
