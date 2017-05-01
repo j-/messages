@@ -6,6 +6,7 @@ import {
 
 import {
 	INode,
+	isNodeTypeValid,
 } from '../node';
 
 export async function executeCreateNode (action: IActionCreateNode): Promise<INode> {
@@ -14,6 +15,8 @@ export async function executeCreateNode (action: IActionCreateNode): Promise<INo
 		throw new Error('Cannot create a node that already has an ID');
 	} else if (partialNode.dateCreated) {
 		throw new Error('Cannot create a node that already has a created date');
+	} else if (!isNodeTypeValid(partialNode.type)) {
+		throw new TypeError(`Did not recognize node type "${partialNode.type}"`);
 	}
 	const node: INode = {
 		...partialNode,

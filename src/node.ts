@@ -29,3 +29,13 @@ export interface ICatNode extends INode {
 export function isCatNode (node: INode): node is ICatNode {
 	return node.type === 'CatNode';
 }
+
+export function isNodeTypeValid (type: string): type is NodeType {
+	switch (type) {
+		case 'ReadNode':
+		case 'CatNode':
+			return true;
+		default:
+			return false;
+	}
+}
