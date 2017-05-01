@@ -8,6 +8,10 @@ import {
 	IMessage,
 } from '../message';
 
+/**
+ * Fetches all messages that belong to nodes which are concatenated by the
+ * CatNode IDs provided.
+ */
 export async function executeCatMessages (action: IActionCatMessages): Promise<IMessage[]> {
 	// Query DB
 	const rows: IMessage[] = await db('message')
