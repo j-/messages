@@ -27,7 +27,7 @@
   "devDependencies": {
     "@types/knex": "0.12",
     "@types/node": "^7.0.13",
-    "@types/uuid": "2.0.29",
+    "@types/uuid": "^2.0.29",
     "tslint": "^5.1.0",
     "typedoc": "^0.5.10",
     "typescript": "^2.2.2"
@@ -36,6 +36,6 @@
     "knex": "^0.12.9",
     "pg": "^6.1.5",
     "sqlite3": "^3.1.8",
-    "uuid": "2.0.29"
+    "uuid": "^2.0.3"
   }
 }
