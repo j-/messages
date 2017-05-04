@@ -27,11 +27,23 @@ app.get('/:ids/messages', async (req, res) => {
 			res.status(status).send(response);
 		}
 	} catch (err) {
-		const status = 500;
-		const response = {
-			error: true,
-		};
-		res.status(status).send(response);
+		if (err.code === 'SQLITE_ERROR') {
+			const status = 500;
+			const response = {
+				error: true,
+				message: 'Error communicating with database',
+			};
+			res.status(status).send(response);
+		} else {
+			const status = 500;
+			const response = {
+				error: true,
+				message: 'An unknown error occurred',
+			};
+			res.status(status).send(response);
+			console.error(err);
+			process.exit(1);
+		}
 	}
 });
 
