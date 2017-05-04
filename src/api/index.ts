@@ -1,10 +1,10 @@
+import './strip-x-powered-by';
 import * as express from 'express';
 import { json } from 'body-parser';
 
 import appNodes from './nodes';
 
 const app: express.Express = express();
-app.disable('x-powered-by');
 
 if (process.env.NODE_ENV !== 'production') {
 	const spaces = 4;

@@ -3,7 +3,6 @@ import { execute } from '../engine';
 import { IActionCatMessages } from '../actions';
 
 const app: express.Express = express();
-app.disable('x-powered-by');
 
 app.get('/:ids/messages', async (req, res) => {
 	const ids: string = req.params.ids;
