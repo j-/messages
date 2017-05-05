@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid';
-import { Transaction } from 'knex';
+import { QueryBuilder } from 'knex';
 import { db } from '../connection';
 
 import {
@@ -65,8 +65,8 @@ export function createMessageFromPartial (partialMessage: Partial<IMessage>) {
 /**
  * Inserts a given message into the database.
  */
-export async function insertMessage (tx: Transaction, message: IMessage): Promise<void> {
-	return tx.table('message').insert({
+export async function insertMessage (db: QueryBuilder, message: IMessage): Promise<void> {
+	return db.table('message').insert({
 		id: message.id,
 		title: message.title,
 		body: message.body,
@@ -83,8 +83,8 @@ export async function insertMessage (tx: Transaction, message: IMessage): Promis
 /**
  * Links a given node ID to a given message ID in the database.
  */
-export async function insertNodeMessage (tx: Transaction, nodeId: UUID, messageId: UUID): Promise<void> {
-	return tx.table('node_messages').insert({
+export async function insertNodeMessage (db: QueryBuilder, nodeId: UUID, messageId: UUID): Promise<void> {
+	return db.table('node_messages').insert({
 		node_id: nodeId,
 		message_id: messageId,
 	});
@@ -94,8 +94,8 @@ export async function insertNodeMessage (tx: Transaction, nodeId: UUID, messageI
  * Resolves if the given node ID exists and is of type ReadNode. Rejects
  * otherwise.
  */
-export async function checkNodeType (tx: Transaction, nodeId: UUID): Promise<void> {
-	const rows = await tx.table('node')
+export async function checkNodeType (db: QueryBuilder, nodeId: UUID): Promise<void> {
+	const rows = await db.table('node')
 		.join('node_types', 'node.node_type', '=', 'node_types.id')
 		.count('node.id as count')
 		.where('node_types.type_name', '=', NODE_TYPE_READ)

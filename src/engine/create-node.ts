@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid';
-import { Transaction } from 'knex';
+import { QueryBuilder } from 'knex';
 import { db } from '../connection';
 
 import {
@@ -69,15 +69,15 @@ export function createNodeFromPartial (partialNode: Partial<INode>) {
 	return node;
 }
 
-export async function insertNode (tx: Transaction, node: INode): Promise<void> {
-	return tx.table('node').insert({
+export async function insertNode (db: QueryBuilder, node: INode): Promise<void> {
+	return db.table('node').insert({
 		id: node.id,
-		node_type: await getNodeTypeId(tx, node.type),
+		node_type: await getNodeTypeId(db, node.type),
 	});
 }
 
-export async function getNodeTypeId (tx: Transaction, nodeType: string): Promise<number> {
-	const rows = await tx.table('node_types').select('id').where('type_name', '=', nodeType);
+export async function getNodeTypeId (db: QueryBuilder, nodeType: string): Promise<number> {
+	const rows = await db.table('node_types').select('id').where('type_name', '=', nodeType);
 	if (rows.length === 0) {
 		throw new UnrecognizedNodeTypeError(`Did not recognize node type "${nodeType}"`);
 	} else {
