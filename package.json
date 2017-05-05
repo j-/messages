@@ -2,7 +2,7 @@
   "name": "messages",
   "version": "0.0.0",
   "description": "messages",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "docs": "typedoc --out docs/ && touch docs/.nojekyll",
@@ -11,7 +11,7 @@
     "make-migration": "cd db && knex migrate:make unnamed-migration",
     "rollback": "cd db && knex migrate:rollback",
     "seed": "cd db && knex seed:run",
-    "start": "node dist/index.js",
+    "start": "node .",
     "test": "npm run lint"
   },
   "repository": {
