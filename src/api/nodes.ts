@@ -23,7 +23,7 @@ app.get('/:ids/messages', async (req, res) => {
 			};
 			res.status(status).send(response);
 		} else {
-			const status = 204;
+			const status = 200;
 			const response = {
 				result: new Array(),
 			};
@@ -68,7 +68,7 @@ app.post('/', async (req, res) => {
 			};
 			res.status(status).send(response);
 		} else {
-			const status = 204;
+			const status = 200;
 			const response = {
 				result: <any>null,
 			};
