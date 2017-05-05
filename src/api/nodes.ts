@@ -33,15 +33,19 @@ app.get('/:ids/messages', async (req, res) => {
 		if (err.code === 'SQLITE_ERROR') {
 			const status = 500;
 			const response = {
-				error: true,
-				message: 'Error communicating with database',
+				error: {
+					name: 'DatabaseError',
+					message: 'Error communicating with database',
+				},
 			};
 			res.status(status).send(response);
 		} else {
 			const status = 500;
 			const response = {
-				error: true,
-				message: 'An unknown error occurred',
+				error: {
+					name: 'UnknownError',
+					message: 'An unknown error occurred',
+				},
 			};
 			res.status(status).send(response);
 			console.error(err);
@@ -74,29 +78,37 @@ app.post('/', async (req, res) => {
 		if (err.name === 'UnrecognizedNodeTypeError') {
 			const status = 400;
 			const response = {
-				error: true,
-				message: err.message,
+				error: {
+					name: err.name,
+					message: err.message,
+				},
 			};
 			res.status(status).send(response);
 		} else if (err.name === 'InvalidPropertyError') {
 			const status = 400;
 			const response = {
-				error: true,
-				message: err.message,
+				error: {
+					name: err.name,
+					message: err.message,
+				},
 			};
 			res.status(status).send(response);
 		} else if (err.code === 'SQLITE_ERROR') {
 			const status = 500;
 			const response = {
-				error: true,
-				message: 'Error communicating with database',
+				error: {
+					name: 'DatabaseError',
+					message: 'Error communicating with database',
+				},
 			};
 			res.status(status).send(response);
 		} else {
 			const status = 500;
 			const response = {
-				error: true,
-				message: 'An unknown error occurred',
+				error: {
+					name: 'UnknownError',
+					message: 'An unknown error occurred',
+				},
 			};
 			res.status(status).send(response);
 			console.error(err);

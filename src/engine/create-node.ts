@@ -77,9 +77,9 @@ export async function insertNode (tx: Transaction, node: INode): Promise<void> {
 }
 
 export async function getNodeTypeId (tx: Transaction, nodeType: string): Promise<number> {
-	const rows = await tx.table('node_types').select('id').where('node_type', '=', nodeType);
+	const rows = await tx.table('node_types').select('id').where('type_name', '=', nodeType);
 	if (rows.length === 0) {
-		const err = new UnrecognizedNodeTypeError(`Did not recognize node type "${nodeType}"`);
+		throw new UnrecognizedNodeTypeError(`Did not recognize node type "${nodeType}"`);
 	} else {
 		return Number(rows[0].id);
 	}
