@@ -9,10 +9,10 @@ const TABLE = 'node_types';
 const DATA = [
 	{
 		id: 1,
-		type_name: 'read',
+		type_name: 'ReadNode',
 	},
 	{
 		id: 2,
-		type_name: 'cat',
+		type_name: 'CatNode',
 	},
 ];

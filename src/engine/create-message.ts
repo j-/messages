@@ -14,7 +14,9 @@ import {
 	IMessage,
 } from '../message';
 
-const NODE_TYPE_READ = 'read';
+import {
+	NODE_TYPE_READ,
+} from '../node';
 
 /**
  * Initializes a database transaction, creates a message record, and links it to
