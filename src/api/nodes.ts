@@ -12,10 +12,23 @@ const app: express.Express = express();
 app.use(json());
 
 app.get('/:ids/messages', async (req, res) => {
-	const ids: string = req.params.ids;
+	let nodeIds: string[];
+	try {
+		nodeIds = parseIds(req.params.ids);
+	} catch (err) {
+		const status = 400;
+		const response = {
+			error: {
+				name: 'SyntaxError',
+				message: err.message,
+			},
+		};
+		res.status(status).send(response);
+		return;
+	}
 	const action: IActionCatMessages = {
 		type: 'CatMessages',
-		nodeIds: parseIds(ids),
+		nodeIds,
 	};
 	try {
 		const messages = await execute(action);

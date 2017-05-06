@@ -187,6 +187,27 @@ test('Cannot get messages from ReadNode', async (t) => {
 	});
 });
 
+test('Cannot get messages from non-existent node', async (t) => {
+	t.plan(2);
+	const res = await request(app).get('/7abaa392-ed97-408a-9876-92edddee1b39/messages');
+	t.is(res.status, 200);
+	t.deepEqual(res.body, {
+		"result": []
+	});
+});
+
+test('Cannot get messages from node with invalid ID', async (t) => {
+	t.plan(2);
+	const res = await request(app).get('/HELLO_WORLD/messages');
+	t.is(res.status, 400);
+	t.deepEqual(res.body, {
+		"error": {
+			"name": "SyntaxError",
+			"message": "Expected UUID, got \"HELLO_WORLD\""
+		}
+	});
+});
+
 test('Can create CatNode', async (t) => {
 	t.plan(5);
 	const res = await request(app).post('/').send({ type: 'CatNode' });
