@@ -1,6 +1,7 @@
 import * as express from 'express';
 import { json } from 'body-parser';
 import { execute } from '../engine';
+import { parseIds } from './id-utils';
 
 import {
 	IActionCatMessages,
@@ -14,7 +15,7 @@ app.get('/:ids/messages', async (req, res) => {
 	const ids: string = req.params.ids;
 	const action: IActionCatMessages = {
 		type: 'CatMessages',
-		nodeIds: ids.split('+'),
+		nodeIds: parseIds(ids),
 	};
 	try {
 		const messages = await execute(action);
