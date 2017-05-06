@@ -1,4 +1,5 @@
 import * as express from 'express';
+import { json } from 'body-parser';
 import { execute } from '../engine';
 
 import {
@@ -7,6 +8,7 @@ import {
 } from '../actions';
 
 const app: express.Express = express();
+app.use(json());
 
 app.get('/:ids/messages', async (req, res) => {
 	const ids: string = req.params.ids;
@@ -55,6 +57,17 @@ app.get('/:ids/messages', async (req, res) => {
 });
 
 app.post('/', async (req, res) => {
+	if (!req.body) {
+		const status = 400;
+		const response = {
+			error: {
+				name: 'MissingPayloadError',
+				message: 'Request body is required',
+			},
+		};
+		res.status(status).send(response);
+		return;
+	}
 	const action: IActionCreateNode = {
 		type: 'CreateNode',
 		node: req.body,
