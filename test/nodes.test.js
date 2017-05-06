@@ -75,3 +75,39 @@ test('Can create ReadNode', async (t) => {
 	t.is(res.body.result.id.length, 36, 'ID is the length of a UUID');
 	t.is(typeof res.body.result.dateCreated, 'number');
 });
+
+test('Cannot create node without type', async (t) => {
+	t.plan(2);
+	const res = await request(app).post('/');
+	t.is(res.status, 400);
+	t.deepEqual(res.body, {
+		"error": {
+			"name": "InvalidPropertyError",
+			"message": "Node must be created with a type"
+		}
+	});
+});
+
+test('Cannot create node with null type', async (t) => {
+	t.plan(2);
+	const res = await request(app).post('/').send({ type: null });
+	t.is(res.status, 400);
+	t.deepEqual(res.body, {
+		"error": {
+			"name": "InvalidPropertyError",
+			"message": "Node must be created with a type"
+		}
+	});
+});
+
+test('Cannot create node with invalid type', async (t) => {
+	t.plan(2);
+	const res = await request(app).post('/').send({ type: 'FooNode' });
+	t.is(res.status, 400);
+	t.deepEqual(res.body, {
+		"error": {
+			"name": "UnrecognizedNodeTypeError",
+			"message": "Did not recognize node type \"FooNode\""
+		}
+	});
+});
