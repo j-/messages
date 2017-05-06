@@ -1,7 +1,7 @@
 import test from 'ava';
 import express from 'express';
 import request from 'supertest';
-import appNodes from '../dist/api/nodes';
+import appNodes from '../../dist/api/nodes';
 
 let app;
 
