@@ -111,3 +111,39 @@ test('Cannot create node with invalid type', async (t) => {
 		}
 	});
 });
+
+test('Cannot create node with ID', async (t) => {
+	t.plan(2);
+	const res = await request(app).post('/').send({ type: 'ReadNode', id: 'Hello world' });
+	t.is(res.status, 400);
+	t.deepEqual(res.body, {
+		"error": {
+			"name": "InvalidPropertyError",
+			"message": "Cannot create a node that already has an ID"
+		}
+	});
+});
+
+test('Cannot create node with created date', async (t) => {
+	t.plan(2);
+	const res = await request(app).post('/').send({ type: 'ReadNode', dateCreated: 1494035965632 });
+	t.is(res.status, 400);
+	t.deepEqual(res.body, {
+		"error": {
+			"name": "InvalidPropertyError",
+			"message": "Cannot create a node that already has a created date"
+		}
+	});
+});
+
+test('Cannot create node with an invalid property', async (t) => {
+	t.plan(2);
+	const res = await request(app).post('/').send({ type: 'ReadNode', foobar: 'baz' });
+	t.is(res.status, 400);
+	t.deepEqual(res.body, {
+		"error": {
+			"name": "InvalidPropertyError",
+			"message": "Did not recognize property with name \"foobar\""
+		}
+	});
+});
