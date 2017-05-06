@@ -11,10 +11,12 @@ import {
 const app: express.Express = express();
 app.use(json());
 
-app.get('/:ids/messages', async (req, res) => {
-	let nodeIds: string[];
+app.use('/:ids', (req, res, next) => {
 	try {
-		nodeIds = parseIds(req.params.ids);
+		(<any>req).context = {
+			ids: parseIds(req.params.ids),
+		};
+		next();
 	} catch (err) {
 		const status = 400;
 		const response = {
@@ -24,11 +26,13 @@ app.get('/:ids/messages', async (req, res) => {
 			},
 		};
 		res.status(status).send(response);
-		return;
 	}
+});
+
+app.get('/:ids/messages', async (req, res) => {
 	const action: IActionCatMessages = {
 		type: 'CatMessages',
-		nodeIds,
+		nodeIds: (<any>req).context.ids,
 	};
 	try {
 		const messages = await execute(action);
