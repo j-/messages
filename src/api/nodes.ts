@@ -5,6 +5,7 @@ import { parseIds } from './id-utils';
 
 import {
 	IActionCatMessages,
+	IActionCreateMessage,
 	IActionCreateNode,
 } from '../actions';
 
@@ -51,6 +52,83 @@ app.get('/:ids/messages', async (req, res) => {
 		}
 	} catch (err) {
 		if (err.code === 'SQLITE_ERROR') {
+			const status = 500;
+			const response = {
+				error: {
+					name: 'DatabaseError',
+					message: 'Error communicating with database',
+				},
+			};
+			res.status(status).send(response);
+		} else {
+			const status = 500;
+			const response = {
+				error: {
+					name: 'UnknownError',
+					message: 'An unknown error occurred',
+				},
+			};
+			res.status(status).send(response);
+			console.error(err);
+			process.exit(1);
+		}
+	}
+});
+
+app.post('/:ids/messages', async (req, res) => {
+	const nodeIds: string[] = (<any>req).context.ids;
+	if (nodeIds.length > 1) {
+		const status = 400;
+		const response = {
+			error: {
+				name: 'InvalidRequestError',
+				message: 'Can only create a message on one node at a time',
+			},
+		};
+		res.status(status).send(response);
+		return;
+	} else if (!req.body) {
+		const status = 400;
+		const response = {
+			error: {
+				name: 'MissingPayloadError',
+				message: 'Request body is required',
+			},
+		};
+		res.status(status).send(response);
+		return;
+	}
+	const action: IActionCreateMessage = {
+		type: 'CreateMessage',
+		message: req.body,
+		nodeId: nodeIds[0],
+	};
+	try {
+		const message = await execute(action);
+		if (message) {
+			const status = 200;
+			const response = {
+				result: message,
+			};
+			res.status(status).send(response);
+		} else {
+			const status = 200;
+			const response = {
+				result: <any>null,
+			};
+			res.status(status).send(response);
+		}
+	} catch (err) {
+		if (err.name === 'TypeError') {
+			const status = 400;
+			const response = {
+				error: {
+					name: 'TypeError',
+					message: err.message,
+				},
+			};
+			res.status(status).send(response);
+		} else if (err.code === 'SQLITE_ERROR') {
 			const status = 500;
 			const response = {
 				error: {
