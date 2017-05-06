@@ -12,7 +12,7 @@
     "rollback": "cd db && knex migrate:rollback",
     "seed": "cd db && knex seed:run",
     "start": "node .",
-    "test": "npm run lint"
+    "test": "npm run lint && ava"
   },
   "repository": {
     "type": "git",
@@ -31,6 +31,8 @@
     "@types/node": "^7.0.13",
     "@types/ramda": "^0.0.7",
     "@types/uuid": "^2.0.29",
+    "ava": "^0.19.1",
+    "supertest": "^3.0.0",
     "tslint": "^5.1.0",
     "typedoc": "^0.5.10",
     "typescript": "^2.2.2"
