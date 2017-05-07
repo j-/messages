@@ -21,6 +21,8 @@ $ npm install
 $ npm run build
 ```
 
+Build output will be available in `dist/`.
+
 ## Start
 
 The project will need to be [built](#build) before you can start the server.
@@ -55,6 +57,8 @@ Documentation is generated with [TypeDoc](http://typedoc.org/).
 ```sh
 $ npm run docs
 ```
+
+Docs output will be available in `docs/`.
 
 ## Database
 
