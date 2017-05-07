@@ -23,6 +23,8 @@ $ npm run build
 
 ## Start
 
+The project will need to be built before you can start the server.
+
 ```sh
 $ npm start
 ```
