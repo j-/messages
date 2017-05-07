@@ -6,3 +6,12 @@ before_script:
   - npm run build
   - npm run latest
   - npm run seed
+before_deploy:
+  - npm run docs
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: docs
+  on:
+    branch: master
