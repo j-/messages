@@ -17,6 +17,8 @@ $ npm install
 
 ## Build
 
+The project is built in [TypeScript](https://www.typescriptlang.org/).
+
 ```sh
 $ npm run build
 ```
