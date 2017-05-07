@@ -31,8 +31,10 @@ $ npm start
 
 ## Test
 
-Tests are run with [AVA](https://github.com/avajs/ava). To test the latest
-changes make sure to [build](#build) the project first.
+Code is linted with [TSLint](https://palantir.github.io/tslint/).
+
+Unit tests are run with [AVA](https://github.com/avajs/ava). To test the latest
+code changes make sure to [build](#build) the project first.
 
 The test suite will connect to your configured `development` database so make
 sure it is [up to date](#update-database) and [seeded](#seed-database) before
