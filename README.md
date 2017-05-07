@@ -3,6 +3,8 @@ messages
 
 > Notification message pipeline
 
+[![Build Status][travis-svg]][travis-link]
+
 ## Install
 
 Install dependencies with [Yarn](https://yarnpkg.com/).
@@ -112,3 +114,6 @@ $ npm run seed
 ## License
 
 [MIT](LICENSE).
+
+[travis-svg]: https://travis-ci.org/j-/messages.svg
+[travis-link]: https://travis-ci.org/j-/messages
