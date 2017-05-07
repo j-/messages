@@ -9,8 +9,8 @@ export type NodeType = (
 	'CatNode'
 );
 
-export const NODE_TYPE_READ = 'ReadNode';
-export const NODE_TYPE_CAT = 'CatNode';
+export const NODE_TYPE_READ: NodeType = 'ReadNode';
+export const NODE_TYPE_CAT: NodeType = 'CatNode';
 
 export interface INode extends IIndexed, ITimestamps {
 	type: NodeType;
