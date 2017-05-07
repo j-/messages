@@ -1,6 +1,8 @@
 messages
 ========
 
+> Notification message pipeline
+
 ## Install
 
 Install dependencies with [Yarn](https://yarnpkg.com/).
