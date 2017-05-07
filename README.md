@@ -86,4 +86,4 @@ $ npm run seed
 
 ## License
 
-MIT.
+[MIT](LICENSE).
