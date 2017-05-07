@@ -46,6 +46,8 @@ $ npm test
 
 ## Docs
 
+Documentation is generated with [TypeDoc](http://typedoc.org/).
+
 ```sh
 $ npm run docs
 ```
