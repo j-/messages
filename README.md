@@ -23,7 +23,7 @@ $ npm run build
 
 ## Start
 
-The project will need to be built before you can start the server.
+The project will need to be [built](#build) before you can start the server.
 
 ```sh
 $ npm start
@@ -32,10 +32,11 @@ $ npm start
 ## Test
 
 Tests are run with [AVA](https://github.com/avajs/ava). To test the latest
-changes make sure to build the project first.
+changes make sure to [build](#build) the project first.
 
-The test suite will connect to your configured development database so make sure
-it is up to date and seeded before running.
+The test suite will connect to your configured `development` database so make
+sure it is [up to date](#update-database) and [seeded](#seed-database) before
+running.
 
 ```sh
 $ npm test
