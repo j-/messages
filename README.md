@@ -62,6 +62,23 @@ Docs output will be available in `docs/`.
 
 ## Database
 
+Databases are provisioned with [Knex](http://knexjs.org/). Environments are
+configured in [`db/knexfile.js`](db/knexfile.js). There are two environments
+set up:
+
+* `development` (default)
+
+  A simple [SQLite](https://www.sqlite.org/) database for easy development and
+  testing.
+
+* `production`
+
+  A [PostgreSQL](https://www.postgresql.org/) database that is configured via
+  the `CONNECTION_STRING` environment variable.
+
+To connect to a production database you will need to run the following commands
+with the `NODE_ENV` environment variable set to `production`.
+
 ### Update database
 
 ```sh
