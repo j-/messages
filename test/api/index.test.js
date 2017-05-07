@@ -20,7 +20,11 @@ test('Can get API server details', async (t) => {
 });
 
 test('Does not return X-Powered-By header', async (t) => {
-	t.plan(1);
+	t.plan(5);
 	const res = await request(app).get('/');
 	t.false('x-powered-by' in res.header);
+	t.false('X-powered-by' in res.header);
+	t.false('X-Powered-by' in res.header);
+	t.false('X-Powered-By' in res.header);
+	t.false('X-POWERED-BY' in res.header);
 });
