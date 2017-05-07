@@ -3,13 +3,13 @@ messages
 
 ## Install
 
-Install with yarn.
+Install dependencies with [Yarn](https://yarnpkg.com/).
 
 ```sh
 $ yarn
 ```
 
-Otherwise, install with npm.
+You can also use npm.
 
 ```sh
 $ npm install
