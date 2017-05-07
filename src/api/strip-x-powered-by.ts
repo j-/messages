@@ -1,4 +1,4 @@
-/**
+/*
  * Modifies the Express application initialization process to forcefully strip
  *   the `X-Powered-By: Express` header from all responses.
  *
