@@ -29,6 +29,10 @@ The project will need to be [built](#build) before you can start the server.
 $ npm start
 ```
 
+Will read the environment variables `HOST` and `PORT` when starting the API
+server. These values default to `127.0.0.1` and `8080` respectively. The server
+will then be available at [http://127.0.0.1:8080/](http://127.0.0.1:8080/).
+
 ## Test
 
 Code is linted with [TSLint](https://palantir.github.io/tslint/).
