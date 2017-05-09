@@ -36,7 +36,7 @@ export async function executeCreateNode (action: IActionCreateNode): Promise<INo
 	return node;
 }
 
-export function validatePartialNode (partialNode: Partial<INode>) {
+export function validatePartialNode (partialNode: Partial<INode>): void {
 	if (!partialNode.type) {
 		throw new InvalidPropertyError('Node must be created with a type');
 	}
@@ -59,7 +59,7 @@ export function validatePartialNode (partialNode: Partial<INode>) {
 	}
 }
 
-export function createNodeFromPartial (partialNode: Partial<INode>) {
+export function createNodeFromPartial (partialNode: Partial<INode>): INode {
 	const node: INode = {
 		...partialNode,
 		type: partialNode.type,
