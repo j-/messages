@@ -70,7 +70,7 @@ export function createNodeFromPartial (partialNode: Partial<INode>) {
 }
 
 export async function insertNode (db: QueryBuilder, node: INode): Promise<void> {
-	return db.table('node').insert({
+	await db.table('node').insert({
 		id: node.id,
 		node_type: await getNodeTypeId(db, node.type),
 	});

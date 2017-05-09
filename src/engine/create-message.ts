@@ -66,7 +66,7 @@ export function createMessageFromPartial (partialMessage: Partial<IMessage>) {
  * Inserts a given message into the database.
  */
 export async function insertMessage (db: QueryBuilder, message: IMessage): Promise<void> {
-	return db.table('message').insert({
+	await db.table('message').insert({
 		id: message.id,
 		title: message.title,
 		body: message.body,
@@ -84,7 +84,7 @@ export async function insertMessage (db: QueryBuilder, message: IMessage): Promi
  * Links a given node ID to a given message ID in the database.
  */
 export async function insertNodeMessage (db: QueryBuilder, nodeId: UUID, messageId: UUID): Promise<void> {
-	return db.table('node_messages').insert({
+	await db.table('node_messages').insert({
 		node_id: nodeId,
 		message_id: messageId,
 	});
