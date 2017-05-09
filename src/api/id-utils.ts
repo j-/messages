@@ -10,12 +10,12 @@ export const DELIMITER = '+';
 
 /**
  * Get unique, lowercase IDs from an input string.
- * @param {string} input IDs concatenated with a delimiter
- * @returns {string[]} List of unique, lowercase IDs
+ * @param input IDs concatenated with a delimiter
+ * @returns List of unique, lowercase IDs
  * @throws {TypeError} If given input is not a string
  * @throws {SyntaxError} If any ID is not a valid UUID
  */
-export function parseIds (input: any) {
+export function parseIds (input: string): string[] {
 	if (typeof input !== 'string') {
 		throw new TypeError(`Expected string, got "${typeof input}"`);
 	}
@@ -24,12 +24,12 @@ export function parseIds (input: any) {
 
 /**
  * Get a lowercase ID from an input string.
- * @param {string} input ID
- * @returns {string} Lowercase ID
+ * @param input ID
+ * @returns Lowercase ID
  * @throws {TypeError} If given input is not a string
  * @throws {SyntaxError} If given input is not a valid UUID
  */
-export function parseId (input: any) {
+export function parseId (input: string): string {
 	if (typeof input !== 'string') {
 		throw new TypeError(`Expected string, got "${typeof input}"`);
 	} else if (!isUuid(input)) {
@@ -40,9 +40,9 @@ export function parseId (input: any) {
 
 /**
  * Join a list of IDs with a delimiter.
- * @param {string[]} input List of IDs to join
- * @returns {string} Joined ID string
+ * @param input List of IDs to join
+ * @returns Joined ID string
  */
-export function stringifyIds (input: string[]) {
+export function stringifyIds (input: string[]): string {
 	return input.join(DELIMITER);
 }
