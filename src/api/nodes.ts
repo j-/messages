@@ -4,6 +4,13 @@ import { execute } from '../engine';
 import { parseIds } from './id-utils';
 
 import {
+	STATUS_OK,
+	STATUS_CREATED,
+	STATUS_BAD_REQUEST,
+	STATUS_INTERNAL_SERVER_ERROR,
+} from './http-response';
+
+import {
 	IActionCatMessages,
 	IActionCreateMessage,
 	IActionCreateNode,
@@ -19,14 +26,12 @@ app.use('/:ids', (req, res, next) => {
 		};
 		next();
 	} catch (err) {
-		const status = 400;
-		const response = {
+		res.status(STATUS_BAD_REQUEST).send({
 			error: {
 				name: 'SyntaxError',
 				message: err.message,
 			},
-		};
-		res.status(status).send(response);
+		});
 	}
 });
 
@@ -38,37 +43,29 @@ app.get('/:ids/messages', async (req, res) => {
 	try {
 		const messages = await execute(action);
 		if (messages) {
-			const status = 200;
-			const response = {
+			res.status(STATUS_OK).send({
 				result: messages,
-			};
-			res.status(status).send(response);
+			});
 		} else {
-			const status = 200;
-			const response = {
+			res.status(STATUS_OK).send({
 				result: new Array(),
-			};
-			res.status(status).send(response);
+			});
 		}
 	} catch (err) {
 		if (err.code === 'SQLITE_ERROR') {
-			const status = 500;
-			const response = {
+			res.status(STATUS_INTERNAL_SERVER_ERROR).send({
 				error: {
 					name: 'DatabaseError',
 					message: 'Error communicating with database',
 				},
-			};
-			res.status(status).send(response);
+			});
 		} else {
-			const status = 500;
-			const response = {
+			res.status(STATUS_INTERNAL_SERVER_ERROR).send({
 				error: {
 					name: 'UnknownError',
 					message: 'An unknown error occurred',
 				},
-			};
-			res.status(status).send(response);
+			});
 			console.error(err);
 			process.exit(1);
 		}
@@ -78,24 +75,20 @@ app.get('/:ids/messages', async (req, res) => {
 app.post('/:ids/messages', async (req, res) => {
 	const nodeIds: string[] = (<any>req).context.ids;
 	if (nodeIds.length > 1) {
-		const status = 400;
-		const response = {
+		res.status(STATUS_BAD_REQUEST).send({
 			error: {
 				name: 'InvalidRequestError',
 				message: 'Can only create a message on one node at a time',
 			},
-		};
-		res.status(status).send(response);
+		});
 		return;
 	} else if (!req.body) {
-		const status = 400;
-		const response = {
+		res.status(STATUS_BAD_REQUEST).send({
 			error: {
 				name: 'MissingPayloadError',
 				message: 'Request body is required',
 			},
-		};
-		res.status(status).send(response);
+		});
 		return;
 	}
 	const action: IActionCreateMessage = {
@@ -106,46 +99,36 @@ app.post('/:ids/messages', async (req, res) => {
 	try {
 		const message = await execute(action);
 		if (message) {
-			const status = 200;
-			const response = {
+			res.status(STATUS_OK).send({
 				result: message,
-			};
-			res.status(status).send(response);
+			});
 		} else {
-			const status = 200;
-			const response = {
+			res.status(STATUS_OK).send({
 				result: <any>null,
-			};
-			res.status(status).send(response);
+			});
 		}
 	} catch (err) {
 		if (err.name === 'TypeError') {
-			const status = 400;
-			const response = {
+			res.status(STATUS_BAD_REQUEST).send({
 				error: {
 					name: 'TypeError',
 					message: err.message,
 				},
-			};
-			res.status(status).send(response);
+			});
 		} else if (err.code === 'SQLITE_ERROR') {
-			const status = 500;
-			const response = {
+			res.status(STATUS_INTERNAL_SERVER_ERROR).send({
 				error: {
 					name: 'DatabaseError',
 					message: 'Error communicating with database',
 				},
-			};
-			res.status(status).send(response);
+			});
 		} else {
-			const status = 500;
-			const response = {
+			res.status(STATUS_INTERNAL_SERVER_ERROR).send({
 				error: {
 					name: 'UnknownError',
 					message: 'An unknown error occurred',
 				},
-			};
-			res.status(status).send(response);
+			});
 			console.error(err);
 			process.exit(1);
 		}
@@ -154,14 +137,12 @@ app.post('/:ids/messages', async (req, res) => {
 
 app.post('/', async (req, res) => {
 	if (!req.body) {
-		const status = 400;
-		const response = {
+		res.status(STATUS_BAD_REQUEST).send({
 			error: {
 				name: 'MissingPayloadError',
 				message: 'Request body is required',
 			},
-		};
-		res.status(status).send(response);
+		});
 		return;
 	}
 	const action: IActionCreateNode = {
@@ -171,55 +152,43 @@ app.post('/', async (req, res) => {
 	try {
 		const node = await execute(action);
 		if (node) {
-			const status = 201;
-			const response = {
+			res.status(STATUS_CREATED).send({
 				result: node,
-			};
-			res.status(status).send(response);
+			});
 		} else {
-			const status = 200;
-			const response = {
+			res.status(STATUS_OK).send({
 				result: <any>null,
-			};
-			res.status(status).send(response);
+			});
 		}
 	} catch (err) {
 		if (err.name === 'UnrecognizedNodeTypeError') {
-			const status = 400;
-			const response = {
+			res.status(STATUS_BAD_REQUEST).send({
 				error: {
 					name: err.name,
 					message: err.message,
 				},
-			};
-			res.status(status).send(response);
+			});
 		} else if (err.name === 'InvalidPropertyError') {
-			const status = 400;
-			const response = {
+			res.status(STATUS_BAD_REQUEST).send({
 				error: {
 					name: err.name,
 					message: err.message,
 				},
-			};
-			res.status(status).send(response);
+			});
 		} else if (err.code === 'SQLITE_ERROR') {
-			const status = 500;
-			const response = {
+			res.status(STATUS_INTERNAL_SERVER_ERROR).send({
 				error: {
 					name: 'DatabaseError',
 					message: 'Error communicating with database',
 				},
-			};
-			res.status(status).send(response);
+			});
 		} else {
-			const status = 500;
-			const response = {
+			res.status(STATUS_INTERNAL_SERVER_ERROR).send({
 				error: {
 					name: 'UnknownError',
 					message: 'An unknown error occurred',
 				},
-			};
-			res.status(status).send(response);
+			});
 			console.error(err);
 			process.exit(1);
 		}
