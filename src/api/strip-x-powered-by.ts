@@ -1,4 +1,8 @@
-/*
+const application: { init: () => void } = require('express/lib/application');
+
+const { init } = application;
+
+/**
  * Modifies the Express application initialization process to forcefully strip
  *   the `X-Powered-By: Express` header from all responses.
  *
@@ -6,14 +10,11 @@
  *   ALL apps -- including sub-apps. Instead of explicitly unsetting this flag
  *   every time we create an app we just patch Express itself.
  */
-
-const application: { init: () => void } = require('express/lib/application');
-
-const { init } = application;
-
-application.init = function () {
-	// Initialize application instance
-	init.call(this);
-	// Unset header flag
-	delete this.settings['x-powered-by'];
-};
+export default function main () {
+	application.init = function () {
+		// Initialize application instance
+		init.call(this);
+		// Unset header flag
+		delete this.settings['x-powered-by'];
+	};
+}

@@ -11,6 +11,9 @@ import {
 	isNodeTypeValid,
 } from '../node';
 
+/**
+ * Gets thrown when a property of an object is of an invalid type or value.
+ */
 export class InvalidPropertyError extends Error {
 	constructor (message: string) {
 		super(message);
@@ -18,6 +21,10 @@ export class InvalidPropertyError extends Error {
 	}
 }
 
+/**
+ * Gets thrown when attempting to initialize a node with a type that is not
+ * recognized by the system.
+ */
 export class UnrecognizedNodeTypeError extends Error {
 	constructor (message: string) {
 		super(message);
@@ -25,6 +32,9 @@ export class UnrecognizedNodeTypeError extends Error {
 	}
 }
 
+/**
+ * Creates a new node in the system.
+ */
 export async function executeCreateNode (action: IActionCreateNode): Promise<INode> {
 	const partialNode = action.node;
 	validatePartialNode(partialNode);
@@ -36,7 +46,10 @@ export async function executeCreateNode (action: IActionCreateNode): Promise<INo
 	return node;
 }
 
-export function validatePartialNode (partialNode: Partial<INode>) {
+/**
+ * Throws an exception if the given partial node contains invalid properties.
+ */
+export function validatePartialNode (partialNode: Partial<INode>): void {
 	if (!partialNode.type) {
 		throw new InvalidPropertyError('Node must be created with a type');
 	}
@@ -59,7 +72,10 @@ export function validatePartialNode (partialNode: Partial<INode>) {
 	}
 }
 
-export function createNodeFromPartial (partialNode: Partial<INode>) {
+/**
+ * Creates a node object when given a partial node object.
+ */
+export function createNodeFromPartial (partialNode: Partial<INode>): INode {
 	const node: INode = {
 		...partialNode,
 		type: partialNode.type,
@@ -69,13 +85,19 @@ export function createNodeFromPartial (partialNode: Partial<INode>) {
 	return node;
 }
 
+/**
+ * Inserts a given node into the database.
+ */
 export async function insertNode (db: QueryBuilder, node: INode): Promise<void> {
-	return db.table('node').insert({
+	await db.table('node').insert({
 		id: node.id,
 		node_type: await getNodeTypeId(db, node.type),
 	});
 }
 
+/**
+ * When given a node type string (e.g. 'CatNode') returns the corresponding ID.
+ */
 export async function getNodeTypeId (db: QueryBuilder, nodeType: string): Promise<number> {
 	const rows = await db.table('node_types').select('id').where('type_name', '=', nodeType);
 	if (rows.length === 0) {

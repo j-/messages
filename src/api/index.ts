@@ -1,7 +1,11 @@
-import './strip-x-powered-by';
+import stripXPoweredBy from './strip-x-powered-by';
 import * as express from 'express';
 
 import appNodes from './nodes';
+
+// Remove the X-Powered-By header from all responses
+// Added automatically by Express for every app otherwise
+stripXPoweredBy();
 
 const app: express.Express = express();
 
