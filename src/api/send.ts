@@ -20,7 +20,7 @@ export interface IResponseError {
 /**
  * Result responses will conform to this format.
  */
-export interface IResponseResult<T = any> {
+export interface IResponseResult<T> {
 	/**
 	 * Result can be anything.
 	 */
@@ -35,6 +35,7 @@ export interface IResponseResult<T = any> {
  * @param response Response payload. May contain an error or the result of an
  *   action.
  */
-export function send<T> (res: Response, status: number, response: IResponseError | IResponseResult<T>) {
+export function send<T> (res: Response, status: number, response: IResponseError | IResponseResult<T>): void;
+export function send (res: Response, status: number, response: IResponseError | IResponseResult<any>): void {
 	res.status(status).send(response);
 }
