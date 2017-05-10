@@ -2,6 +2,7 @@ import * as express from 'express';
 import { json } from 'body-parser';
 import { execute } from '../engine';
 import { parseIds } from './id-utils';
+import { send } from './send';
 
 import {
 	STATUS_OK,
@@ -16,6 +17,14 @@ import {
 	IActionCreateNode,
 } from '../actions';
 
+import {
+	IMessage,
+} from '../message';
+
+import {
+	INode,
+} from '../node';
+
 const app: express.Express = express();
 app.use(json());
 
@@ -26,7 +35,7 @@ app.use('/:ids', (req, res, next) => {
 		};
 		next();
 	} catch (err) {
-		res.status(STATUS_BAD_REQUEST).send({
+		send(res, STATUS_BAD_REQUEST, {
 			error: {
 				name: 'SyntaxError',
 				message: err.message,
@@ -43,24 +52,24 @@ app.get('/:ids/messages', async (req, res) => {
 	try {
 		const messages = await execute(action);
 		if (messages) {
-			res.status(STATUS_OK).send({
+			send<IMessage[]>(res, STATUS_OK, {
 				result: messages,
 			});
 		} else {
-			res.status(STATUS_OK).send({
-				result: new Array(),
+			send<IMessage[]>(res, STATUS_OK, {
+				result: [],
 			});
 		}
 	} catch (err) {
 		if (err.code === 'SQLITE_ERROR') {
-			res.status(STATUS_INTERNAL_SERVER_ERROR).send({
+			send(res, STATUS_INTERNAL_SERVER_ERROR, {
 				error: {
 					name: 'DatabaseError',
 					message: 'Error communicating with database',
 				},
 			});
 		} else {
-			res.status(STATUS_INTERNAL_SERVER_ERROR).send({
+			send(res, STATUS_INTERNAL_SERVER_ERROR, {
 				error: {
 					name: 'UnknownError',
 					message: 'An unknown error occurred',
@@ -75,7 +84,7 @@ app.get('/:ids/messages', async (req, res) => {
 app.post('/:ids/messages', async (req, res) => {
 	const nodeIds: string[] = (<any>req).context.ids;
 	if (nodeIds.length > 1) {
-		res.status(STATUS_BAD_REQUEST).send({
+		send(res, STATUS_BAD_REQUEST, {
 			error: {
 				name: 'InvalidRequestError',
 				message: 'Can only create a message on one node at a time',
@@ -83,7 +92,7 @@ app.post('/:ids/messages', async (req, res) => {
 		});
 		return;
 	} else if (!req.body) {
-		res.status(STATUS_BAD_REQUEST).send({
+		send(res, STATUS_BAD_REQUEST, {
 			error: {
 				name: 'MissingPayloadError',
 				message: 'Request body is required',
@@ -99,31 +108,31 @@ app.post('/:ids/messages', async (req, res) => {
 	try {
 		const message = await execute(action);
 		if (message) {
-			res.status(STATUS_OK).send({
+			send<IMessage>(res, STATUS_OK, {
 				result: message,
 			});
 		} else {
-			res.status(STATUS_OK).send({
-				result: <any>null,
+			send<IMessage>(res, STATUS_OK, {
+				result: null,
 			});
 		}
 	} catch (err) {
 		if (err.name === 'TypeError') {
-			res.status(STATUS_BAD_REQUEST).send({
+			send(res, STATUS_BAD_REQUEST, {
 				error: {
 					name: 'TypeError',
 					message: err.message,
 				},
 			});
 		} else if (err.code === 'SQLITE_ERROR') {
-			res.status(STATUS_INTERNAL_SERVER_ERROR).send({
+			send(res, STATUS_INTERNAL_SERVER_ERROR, {
 				error: {
 					name: 'DatabaseError',
 					message: 'Error communicating with database',
 				},
 			});
 		} else {
-			res.status(STATUS_INTERNAL_SERVER_ERROR).send({
+			send(res, STATUS_INTERNAL_SERVER_ERROR, {
 				error: {
 					name: 'UnknownError',
 					message: 'An unknown error occurred',
@@ -137,7 +146,7 @@ app.post('/:ids/messages', async (req, res) => {
 
 app.post('/', async (req, res) => {
 	if (!req.body) {
-		res.status(STATUS_BAD_REQUEST).send({
+		send(res, STATUS_BAD_REQUEST, {
 			error: {
 				name: 'MissingPayloadError',
 				message: 'Request body is required',
@@ -152,38 +161,38 @@ app.post('/', async (req, res) => {
 	try {
 		const node = await execute(action);
 		if (node) {
-			res.status(STATUS_CREATED).send({
+			send<INode>(res, STATUS_CREATED, {
 				result: node,
 			});
 		} else {
-			res.status(STATUS_OK).send({
-				result: <any>null,
+			send<INode>(res, STATUS_OK, {
+				result: null,
 			});
 		}
 	} catch (err) {
 		if (err.name === 'UnrecognizedNodeTypeError') {
-			res.status(STATUS_BAD_REQUEST).send({
+			send(res, STATUS_BAD_REQUEST, {
 				error: {
 					name: err.name,
 					message: err.message,
 				},
 			});
 		} else if (err.name === 'InvalidPropertyError') {
-			res.status(STATUS_BAD_REQUEST).send({
+			send(res, STATUS_BAD_REQUEST, {
 				error: {
 					name: err.name,
 					message: err.message,
 				},
 			});
 		} else if (err.code === 'SQLITE_ERROR') {
-			res.status(STATUS_INTERNAL_SERVER_ERROR).send({
+			send(res, STATUS_INTERNAL_SERVER_ERROR, {
 				error: {
 					name: 'DatabaseError',
 					message: 'Error communicating with database',
 				},
 			});
 		} else {
-			res.status(STATUS_INTERNAL_SERVER_ERROR).send({
+			send(res, STATUS_INTERNAL_SERVER_ERROR, {
 				error: {
 					name: 'UnknownError',
 					message: 'An unknown error occurred',
