@@ -42,4 +42,25 @@ const DATA = [
 		// Gimmie my darn enchiladas!
 		message_id: '965d981b-58a8-4921-9783-ac52dba84012',
 	},
+	{
+		// 'Update message by tag' node
+		node_id: '95a09eb6-5e55-4f55-ab6a-69c36a23ff94',
+		// Unread messages
+		// You have 1 unread message
+		message_id: '8c10d863-14e3-45f8-8641-9797ae20624e',
+	},
+	{
+		// 'Update message by tag' node
+		node_id: '95a09eb6-5e55-4f55-ab6a-69c36a23ff94',
+		// Unread messages
+		// You have 2 unread messages
+		message_id: '3e08c0ff-f901-49e2-80e8-085e5125deff',
+	},
+	{
+		// 'Update message by tag' node
+		node_id: '95a09eb6-5e55-4f55-ab6a-69c36a23ff94',
+		// Unread messages
+		// You have 3 unread messages
+		message_id: 'e6bc24df-5db3-4041-8f36-bfe9d1f1187b',
+	},
 ];
