@@ -72,6 +72,11 @@ export function isCreateMessageAction (action: IAction): action is IActionCreate
  */
 export interface IActionGetNodes extends IAction {
 	type: 'GetNodes';
+
+	/**
+	 * IDs of the nodes to get details about.
+	 */
+	nodeIds: UUID[];
 }
 
 /**

@@ -15,6 +15,7 @@ import {
 	IActionCatMessages,
 	IActionCreateMessage,
 	IActionCreateNode,
+	IActionGetNodes,
 } from '../actions';
 
 import {
@@ -41,6 +42,43 @@ app.use('/:ids', (req, res, next) => {
 				message: err.message,
 			},
 		});
+	}
+});
+
+app.get('/:ids', async (req, res) => {
+	const action: IActionGetNodes = {
+		type: 'GetNodes',
+		nodeIds: (<any>req).context.ids,
+	};
+	try {
+		const nodes = await execute(action);
+		if (nodes) {
+			send<INode[]>(res, STATUS_OK, {
+				result: nodes,
+			});
+		} else {
+			send<INode[]>(res, STATUS_OK, {
+				result: [],
+			});
+		}
+	} catch (err) {
+		if (err.code === 'SQLITE_ERROR') {
+			send(res, STATUS_INTERNAL_SERVER_ERROR, {
+				error: {
+					name: 'DatabaseError',
+					message: 'Error communicating with database',
+				},
+			});
+		} else {
+			send(res, STATUS_INTERNAL_SERVER_ERROR, {
+				error: {
+					name: 'UnknownError',
+					message: 'An unknown error occurred',
+				},
+			});
+			console.error(err);
+			process.exit(1);
+		}
 	}
 });
 
