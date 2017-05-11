@@ -10,6 +10,42 @@ test.beforeEach(() => {
 	app.use(appNodes);
 });
 
+test('Can get details about a node', async (t) => {
+	t.plan(2);
+	const res = await request(app).get('/99e0c2cb-0d46-49aa-afe2-898f0f5af337');
+	t.is(res.status, 200);
+	t.deepEqual(res.body, {
+		"result": [
+			{
+				"id": "99e0c2cb-0d46-49aa-afe2-898f0f5af337",
+				"type": "CatNode"
+			}
+		]
+	});
+});
+
+test('Can get details about multiple nodes', async (t) => {
+	t.plan(2);
+	const res = await request(app).get('/99e0c2cb-0d46-49aa-afe2-898f0f5af337+afa0319a-9391-4c27-a7fe-e50f226ce735+e92d26e5-d10a-41c7-9439-dbc7d01161e4');
+	t.is(res.status, 200);
+	t.deepEqual(res.body, {
+		"result": [
+			{
+				"id": "99e0c2cb-0d46-49aa-afe2-898f0f5af337",
+				"type": "CatNode"
+			},
+			{
+				"id": "afa0319a-9391-4c27-a7fe-e50f226ce735",
+				"type": "CatNode"
+			},
+			{
+				"id": "e92d26e5-d10a-41c7-9439-dbc7d01161e4",
+				"type": "ReadNode"
+			}
+		]
+	});
+});
+
 test('Can get messages from CatNode', async (t) => {
 	t.plan(2);
 	const res = await request(app).get('/99e0c2cb-0d46-49aa-afe2-898f0f5af337/messages');
