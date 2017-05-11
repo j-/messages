@@ -41,4 +41,25 @@ const DATA = [
 		body: 'Gimmie my darn enchiladas!',
 		date_created: 1493213571527,
 	},
+	{
+		id: '8c10d863-14e3-45f8-8641-9797ae20624e',
+		title: 'Unread messages',
+		body: 'You have 1 unread message',
+		tag: 'message_count',
+		date_created: 1494500275499,
+	},
+	{
+		id: '3e08c0ff-f901-49e2-80e8-085e5125deff',
+		title: 'Unread messages',
+		body: 'You have 2 unread messages',
+		tag: 'message_count',
+		date_created: 1494500287128,
+	},
+	{
+		id: 'e6bc24df-5db3-4041-8f36-bfe9d1f1187b',
+		title: 'Unread messages',
+		body: 'You have 3 unread messages',
+		tag: 'message_count',
+		date_created: 1494500304806,
+	},
 ];
