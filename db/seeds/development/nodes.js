@@ -37,4 +37,9 @@ const DATA = [
 		id: '99e0c2cb-0d46-49aa-afe2-898f0f5af337',
 		node_type: 2,
 	},
+	{
+		// 'Update message by tag' node
+		id: '95a09eb6-5e55-4f55-ab6a-69c36a23ff94',
+		node_type: 1,
+	},
 ];
