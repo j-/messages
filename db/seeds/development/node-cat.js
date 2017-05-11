@@ -31,4 +31,10 @@ const DATA = [
 		// 'Rixty Minutes' node
 		output_node_id: '99e0c2cb-0d46-49aa-afe2-898f0f5af337',
 	},
+	{
+		// 'Update message by tag' read node
+		input_node_id: '95a09eb6-5e55-4f55-ab6a-69c36a23ff94',
+		// 'Update message by tag' cat node
+		output_node_id: 'cd431717-6c53-4af1-a25a-e80bf611b79f',
+	},
 ];

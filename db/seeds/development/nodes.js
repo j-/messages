@@ -38,8 +38,13 @@ const DATA = [
 		node_type: 2,
 	},
 	{
-		// 'Update message by tag' node
+		// 'Update message by tag' read node
 		id: '95a09eb6-5e55-4f55-ab6a-69c36a23ff94',
 		node_type: 1,
+	},
+	{
+		// 'Update message by tag' cat node
+		id: 'cd431717-6c53-4af1-a25a-e80bf611b79f',
+		node_type: 2,
 	},
 ];
