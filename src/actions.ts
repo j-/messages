@@ -105,3 +105,23 @@ export interface IActionCatMessages extends IAction {
 export function isCatMessagesAction (action: IAction): action is IActionCatMessages {
 	return action.type === 'CatMessages';
 }
+
+/**
+ * Find all the nodes that the given nodes concatenate. Recurses the node tree
+ * to find not just immediate nodes but all nodes.
+ */
+export interface IActionExpandNodes extends IAction {
+	type: 'ExpandNodes';
+
+	/**
+	 * The IDs of the nodes to expand.
+	 */
+	nodeIds: UUID[];
+}
+
+/**
+ * Type guard. `true` if the given action is of type [[IActionExpandNodes]].
+ */
+export function isExpandNodesAction (action: IAction): action is IActionExpandNodes {
+	return action.type === 'ExpandNodes';
+}
