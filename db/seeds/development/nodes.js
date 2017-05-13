@@ -48,6 +48,11 @@ const DATA = [
 		node_type: 2,
 	},
 	{
+		// Recursive node child
+		id: '0035a5dd-74dd-4e4f-a0b5-5e905f679595',
+		node_type: 1,
+	},
+	{
 		// Recursive node A
 		id: 'b24558da-4867-4b9a-a8fb-930a8fdb25eb',
 		node_type: 2,

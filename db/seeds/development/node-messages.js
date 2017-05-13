@@ -63,4 +63,12 @@ const DATA = [
 		// You have 3 unread messages
 		message_id: 'e6bc24df-5db3-4041-8f36-bfe9d1f1187b',
 	},
+	{
+		// Recursive node child
+		node_id: '0035a5dd-74dd-4e4f-a0b5-5e905f679595',
+		// Recursive message test
+		// This message is published to node A which is concatenated by node B
+		// which is concatenated by node A etc.
+		message_id: 'a8b77ae9-f0fd-4e3d-a126-22087b12186e',
+	},
 ];

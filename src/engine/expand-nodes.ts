@@ -8,6 +8,10 @@ import {
 	UUID,
 } from '../types';
 
+import {
+	INode,
+} from '../node';
+
 export async function executeExpandNodes (action: IActionExpandNodes): Promise<UUID[]> {
 	const result: UUID[] = [];
 	let parentNodeIds: UUID[] = action.nodeIds;
@@ -20,13 +24,13 @@ export async function executeExpandNodes (action: IActionExpandNodes): Promise<U
 			break;
 		}
 	}
-	return result;
+	return [...result, ...action.nodeIds];
 }
 
 export async function getChildNodeIds (parentIds: UUID[], blackListIds: UUID[] = []): Promise<UUID[]> {
-	const result: UUID[] = await db('node_cat')
-		.column('input_node_id')
+	const rows: Partial<INode>[] = await db('node_cat')
+		.column('input_node_id as id')
 		.where('output_node_id', 'in', parentIds)
-		.andWhereNot('output_node_id', 'in', blackListIds);
-	return result;
+		.andWhere('output_node_id', 'not in', blackListIds);
+	return rows.map((row) => row.id);
 }

@@ -38,6 +38,12 @@ const DATA = [
 		output_node_id: 'cd431717-6c53-4af1-a25a-e80bf611b79f',
 	},
 	{
+		// Recursive node child
+		input_node_id: '0035a5dd-74dd-4e4f-a0b5-5e905f679595',
+		// Recursive node A
+		output_node_id: 'b24558da-4867-4b9a-a8fb-930a8fdb25eb',
+	},
+	{
 		// Recursive node A
 		input_node_id: 'b24558da-4867-4b9a-a8fb-930a8fdb25eb',
 		// Recursive node B
