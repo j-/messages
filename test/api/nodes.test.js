@@ -214,6 +214,28 @@ test('Can get messages from nodes in any order', async (t) => {
 	});
 });
 
+test('Only the latest message with a particular tag is returned', async (t) => {
+	t.plan(2);
+	const res = await request(app).get('/cd431717-6c53-4af1-a25a-e80bf611b79f/messages');
+	t.is(res.status, 200);
+	t.deepEqual(res.body, {
+		"result": [
+			{
+				"id": "e6bc24df-5db3-4041-8f36-bfe9d1f1187b",
+				"title": "Unread messages",
+				"body": "You have 3 unread messages",
+				"tag": "message_count",
+				"icon": null,
+				"data": null,
+				"url": null,
+				"timestamp": null,
+				"dateCreated": 1494500275499,
+				"dateModified": 1494500304806
+			}
+		]
+	});
+});
+
 test('Cannot get messages from ReadNode', async (t) => {
 	t.plan(2);
 	const res = await request(app).get('/8c5c1e89-b523-4e2d-93c4-274f1c4baa6f/messages');
