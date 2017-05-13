@@ -19,7 +19,6 @@ export async function executeCatMessages (action: IActionCatMessages): Promise<I
 		.join('node_cat', 'node_cat.input_node_id', '=', 'node_messages.node_id')
 		.where('node_cat.output_node_id', 'in', action.nodeIds)
 		.orderBy('message.date_created', 'desc')
-		.orderBy('message.date_modified', 'desc')
 		.orderBy('message.timestamp', 'desc')
 		.groupByRaw('ifnull(message.tag, message.id)')
 		.distinct('message.id')
