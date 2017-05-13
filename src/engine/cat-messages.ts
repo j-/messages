@@ -8,16 +8,22 @@ import {
 	IMessage,
 } from '../message';
 
+import { executeExpandNodes } from './expand-nodes';
+
 /**
  * Fetches all messages that belong to nodes which are concatenated by the
  * CatNode IDs provided.
  */
 export async function executeCatMessages (action: IActionCatMessages): Promise<IMessage[]> {
+	const nodeIds = await executeExpandNodes({
+		type: 'ExpandNodes',
+		nodeIds: action.nodeIds,
+	});
 	// Query DB
 	const rows: IMessage[] = await db('message')
 		.join('node_messages', 'message.id', '=', 'node_messages.message_id')
 		.join('node_cat', 'node_cat.input_node_id', '=', 'node_messages.node_id')
-		.where('node_cat.output_node_id', 'in', action.nodeIds)
+		.where('node_cat.output_node_id', 'in', nodeIds)
 		.orderBy('message.date_created', 'desc')
 		.orderBy('message.timestamp', 'desc')
 		.groupByRaw('ifnull(message.tag, message.id)')

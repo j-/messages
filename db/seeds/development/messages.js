@@ -62,4 +62,10 @@ const DATA = [
 		tag: 'message_count',
 		date_created: 1494500304806,
 	},
+	{
+		id: 'a8b77ae9-f0fd-4e3d-a126-22087b12186e',
+		title: 'Recursive message test',
+		body: 'This message is published to node A which is concatenated by node B which is concatenated by node A etc.',
+		date_created: 1494657341036,
+	},
 ];

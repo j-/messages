@@ -47,4 +47,19 @@ const DATA = [
 		id: 'cd431717-6c53-4af1-a25a-e80bf611b79f',
 		node_type: 2,
 	},
+	{
+		// Recursive node child
+		id: '0035a5dd-74dd-4e4f-a0b5-5e905f679595',
+		node_type: 1,
+	},
+	{
+		// Recursive node A
+		id: 'b24558da-4867-4b9a-a8fb-930a8fdb25eb',
+		node_type: 2,
+	},
+	{
+		// Recursive node B
+		id: '57ebddd5-3660-482f-b524-bb388cfad17c',
+		node_type: 2,
+	},
 ];

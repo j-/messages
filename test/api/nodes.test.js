@@ -236,6 +236,46 @@ test('Only the latest message with a particular tag is returned', async (t) => {
 	});
 });
 
+test('Can get messages from nodes that depend on each other', async (t) => {
+	t.plan(4);
+	const resA = await request(app).get('/b24558da-4867-4b9a-a8fb-930a8fdb25eb/messages');
+	t.is(resA.status, 200);
+	t.deepEqual(resA.body, {
+		"result": [
+			{
+				"id": "a8b77ae9-f0fd-4e3d-a126-22087b12186e",
+				"title": "Recursive message test",
+				"body": "This message is published to node A which is concatenated by node B which is concatenated by node A etc.",
+				"tag": null,
+				"icon": null,
+				"data": null,
+				"url": null,
+				"timestamp": null,
+				"dateCreated": 1494657341036,
+				"dateModified": null
+			}
+		]
+	});
+	const resB = await request(app).get('/57ebddd5-3660-482f-b524-bb388cfad17c/messages');
+	t.is(resB.status, 200);
+	t.deepEqual(resB.body, {
+		"result": [
+			{
+				"id": "a8b77ae9-f0fd-4e3d-a126-22087b12186e",
+				"title": "Recursive message test",
+				"body": "This message is published to node A which is concatenated by node B which is concatenated by node A etc.",
+				"tag": null,
+				"icon": null,
+				"data": null,
+				"url": null,
+				"timestamp": null,
+				"dateCreated": 1494657341036,
+				"dateModified": null
+			}
+		]
+	});
+});
+
 test('Cannot get messages from ReadNode', async (t) => {
 	t.plan(2);
 	const res = await request(app).get('/8c5c1e89-b523-4e2d-93c4-274f1c4baa6f/messages');
