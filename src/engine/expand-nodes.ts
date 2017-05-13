@@ -12,6 +12,11 @@ import {
 	INode,
 } from '../node';
 
+/**
+ * For a given list of node IDs, will return all the nodes they concatenate and
+ * all the nodes _they_ concatenate etc. Also returns the input nodes because
+ * some of them may be ReadNodes, not CatNodes.
+ */
 export async function executeExpandNodes (action: IActionExpandNodes): Promise<UUID[]> {
 	const result: UUID[] = [];
 	let parentNodeIds: UUID[] = action.nodeIds;
@@ -27,6 +32,11 @@ export async function executeExpandNodes (action: IActionExpandNodes): Promise<U
 	return [...result, ...action.nodeIds];
 }
 
+/**
+ * For a cat node will return the IDs of all the child nodes it concatenates.
+ * @param parentIds List of cat node IDs
+ * @param blackListIds Optional list of IDs to exclude from search
+ */
 export async function getChildNodeIds (parentIds: UUID[], blackListIds: UUID[] = []): Promise<UUID[]> {
 	const rows: Partial<INode>[] = await db('node_cat')
 		.column('input_node_id as id')
