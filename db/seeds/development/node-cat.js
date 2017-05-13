@@ -37,4 +37,16 @@ const DATA = [
 		// 'Update message by tag' cat node
 		output_node_id: 'cd431717-6c53-4af1-a25a-e80bf611b79f',
 	},
+	{
+		// Recursive node A
+		input_node_id: 'b24558da-4867-4b9a-a8fb-930a8fdb25eb',
+		// Recursive node B
+		output_node_id: '57ebddd5-3660-482f-b524-bb388cfad17c',
+	},
+	{
+		// Recursive node B
+		input_node_id: '57ebddd5-3660-482f-b524-bb388cfad17c',
+		// Recursive node A
+		output_node_id: 'b24558da-4867-4b9a-a8fb-930a8fdb25eb',
+	},
 ];
