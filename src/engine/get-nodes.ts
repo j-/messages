@@ -27,7 +27,7 @@ export async function executeGetNodes (action: IActionGetNodes): Promise<INode[]
 	const nodes: INode[] = result[0];
 	const concatMap: NodeConcatMap = result[1];
 	nodes.filter(isCatNode).forEach((node: ICatNode) => {
-		node.concatenates = concatMap[node.id];
+		node.concatenates = concatMap[node.id] || null;
 	});
 	return nodes;
 }
