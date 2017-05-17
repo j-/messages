@@ -53,8 +53,7 @@ export async function getNodeConcatMap (db: QueryBuilder, nodeIds: UUID[]): Prom
 		]);
 	// Map of inputs (as an array) that correspond to an output (index)
 	const map: NodeConcatMap = {};
-	for (const row of rows) {
-		const { inputId, outputId } = row;
+	for (const { inputId, outputId } of rows) {
 		const concatenates: UUID[] = map[outputId] || [];
 		concatenates.push(inputId);
 		map[outputId] = concatenates;
