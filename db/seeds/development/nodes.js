@@ -62,4 +62,9 @@ const DATA = [
 		id: '57ebddd5-3660-482f-b524-bb388cfad17c',
 		node_type: 2,
 	},
+	{
+		// CatNode with no inputs
+		id: '154d9c16-1c3a-4b1b-aa81-fda51132d573',
+		node_type: 2,
+	},
 ];

@@ -59,6 +59,21 @@ test('Can get details about multiple nodes', async (t) => {
 	});
 });
 
+test('CatNodes with no inputs have `concatenates` set to `null`', async (t) => {
+	t.plan(2);
+	const res = await request(app).get('/154d9c16-1c3a-4b1b-aa81-fda51132d573');
+	t.is(res.status, 200);
+	t.deepEqual(res.body, {
+		"result": [
+			{
+				"id": "154d9c16-1c3a-4b1b-aa81-fda51132d573",
+				"type": "CatNode",
+				"concatenates": null
+			}
+		]
+	});
+});
+
 test('Can get messages from CatNode', async (t) => {
 	t.plan(2);
 	const res = await request(app).get('/99e0c2cb-0d46-49aa-afe2-898f0f5af337/messages');
