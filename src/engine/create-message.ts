@@ -57,7 +57,7 @@ export function createMessageFromPartial (partialMessage: Partial<IMessage>) {
 	const message: IMessage = {
 		...partialMessage,
 		id: uuid(),
-		dateCreated: Date.now(),
+		dateCreated: new Date().toISOString(),
 	};
 	return message;
 }

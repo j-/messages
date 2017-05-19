@@ -25,7 +25,7 @@ test('Can get messages from CatNode', async (t) => {
 				"data": null,
 				"url": null,
 				"timestamp": null,
-				"dateCreated": 1493213001576,
+				"dateCreated": "2017-04-26T13:23:21.576Z",
 				"dateModified": null
 			},
 			{
@@ -37,7 +37,7 @@ test('Can get messages from CatNode', async (t) => {
 				"data": null,
 				"url": null,
 				"timestamp": null,
-				"dateCreated": 1493212993511,
+				"dateCreated": "2017-04-26T13:23:13.511Z",
 				"dateModified": null
 			},
 			{
@@ -49,7 +49,7 @@ test('Can get messages from CatNode', async (t) => {
 				"data": null,
 				"url": null,
 				"timestamp": null,
-				"dateCreated": 1493212943841,
+				"dateCreated": "2017-04-26T13:22:23.841Z",
 				"dateModified": null
 			}
 		]
@@ -71,7 +71,7 @@ test('Can get messages from multiple CatNodes', async (t) => {
 				"data": null,
 				"url": null,
 				"timestamp": null,
-				"dateCreated": 1493213001576,
+				"dateCreated": "2017-04-26T13:23:21.576Z",
 				"dateModified": null
 			},
 			{
@@ -83,7 +83,7 @@ test('Can get messages from multiple CatNodes', async (t) => {
 				"data": null,
 				"url": null,
 				"timestamp": null,
-				"dateCreated": 1493212993511,
+				"dateCreated": "2017-04-26T13:23:13.511Z",
 				"dateModified": null
 			},
 			{
@@ -95,7 +95,7 @@ test('Can get messages from multiple CatNodes', async (t) => {
 				"data": null,
 				"url": null,
 				"timestamp": null,
-				"dateCreated": 1493212943841,
+				"dateCreated": "2017-04-26T13:22:23.841Z",
 				"dateModified": null
 			},
 			{
@@ -110,7 +110,7 @@ test('Can get messages from multiple CatNodes', async (t) => {
 				},
 				"url": null,
 				"timestamp": null,
-				"dateCreated": 1493212879111,
+				"dateCreated": "2017-04-26T13:21:19.111Z",
 				"dateModified": null
 			}
 		]
@@ -132,7 +132,7 @@ test('Can get messages from nodes in any order', async (t) => {
 				"data": null,
 				"url": null,
 				"timestamp": null,
-				"dateCreated": 1493213001576,
+				"dateCreated": "2017-04-26T13:23:21.576Z",
 				"dateModified": null
 			},
 			{
@@ -144,7 +144,7 @@ test('Can get messages from nodes in any order', async (t) => {
 				"data": null,
 				"url": null,
 				"timestamp": null,
-				"dateCreated": 1493212993511,
+				"dateCreated": "2017-04-26T13:23:13.511Z",
 				"dateModified": null
 			},
 			{
@@ -156,7 +156,7 @@ test('Can get messages from nodes in any order', async (t) => {
 				"data": null,
 				"url": null,
 				"timestamp": null,
-				"dateCreated": 1493212943841,
+				"dateCreated": "2017-04-26T13:22:23.841Z",
 				"dateModified": null
 			},
 			{
@@ -171,7 +171,7 @@ test('Can get messages from nodes in any order', async (t) => {
 				},
 				"url": null,
 				"timestamp": null,
-				"dateCreated": 1493212879111,
+				"dateCreated": "2017-04-26T13:21:19.111Z",
 				"dateModified": null
 			}
 		]
@@ -193,8 +193,8 @@ test('Only the latest message with a particular tag is returned', async (t) => {
 				"data": null,
 				"url": null,
 				"timestamp": null,
-				"dateCreated": 1494500275499,
-				"dateModified": 1494500304806
+				"dateCreated": "2017-05-11T10:57:55.499Z",
+				"dateModified": "2017-05-11T10:58:24.806Z"
 			}
 		]
 	});
@@ -215,7 +215,7 @@ test('Can get messages from nodes that depend on each other', async (t) => {
 				"data": null,
 				"url": null,
 				"timestamp": null,
-				"dateCreated": 1494657341036,
+				"dateCreated": "2017-05-13T06:35:41.036Z",
 				"dateModified": null
 			}
 		]
@@ -233,7 +233,7 @@ test('Can get messages from nodes that depend on each other', async (t) => {
 				"data": null,
 				"url": null,
 				"timestamp": null,
-				"dateCreated": 1494657341036,
+				"dateCreated": "2017-05-13T06:35:41.036Z",
 				"dateModified": null
 			}
 		]

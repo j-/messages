@@ -11,23 +11,25 @@ test.beforeEach(() => {
 });
 
 test('Can create CatNode', async (t) => {
-	t.plan(5);
+	t.plan(6);
 	const res = await request(app).post('/').send({ type: 'CatNode' });
 	t.is(res.status, 201);
 	t.is(res.body.result.type, 'CatNode', 'Node type is CatNode');
 	t.is(typeof res.body.result.id, 'string', 'Node has an id');
 	t.is(res.body.result.id.length, 36, 'ID is the length of a UUID');
-	t.is(typeof res.body.result.dateCreated, 'number');
+	t.is(typeof res.body.result.dateCreated, 'string');
+	t.false(isNaN(new Date(res.body.result.dateCreated)));
 });
 
 test('Can create ReadNode', async (t) => {
-	t.plan(5);
+	t.plan(6);
 	const res = await request(app).post('/').send({ type: 'ReadNode' });
 	t.is(res.status, 201);
 	t.is(res.body.result.type, 'ReadNode', 'Node type is ReadNode');
 	t.is(typeof res.body.result.id, 'string', 'Node has an id');
 	t.is(res.body.result.id.length, 36, 'ID is the length of a UUID');
-	t.is(typeof res.body.result.dateCreated, 'number');
+	t.is(typeof res.body.result.dateCreated, 'string');
+	t.false(isNaN(new Date(res.body.result.dateCreated)));
 });
 
 test('Cannot create node without type', async (t) => {
