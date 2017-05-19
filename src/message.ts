@@ -49,7 +49,8 @@ export interface IMessage extends IIndexed, ITimestamps {
 
 	/**
 	 * The time this message was created or last modified according to the
-	 * system that originated this message. Can be in the past or future.
+	 * system that originated this message. Can be in the past or future. ISO
+	 * date string.
 	 */
-	timestamp?: number;
+	timestamp?: string;
 }

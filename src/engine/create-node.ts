@@ -80,7 +80,7 @@ export function createNodeFromPartial (partialNode: Partial<INode>): INode {
 		...partialNode,
 		type: partialNode.type,
 		id: uuid(),
-		dateCreated: Date.now(),
+		dateCreated: new Date().toISOString(),
 	};
 	return node;
 }

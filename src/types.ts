@@ -18,9 +18,9 @@ export interface IIndexed {
  */
 export interface IDateCreated {
 	/**
-	 * When this was created. Milliseconds since Unix epoch.
+	 * When this was created. ISO date string.
 	 */
-	dateCreated?: number;
+	dateCreated?: string;
 }
 
 /**
@@ -28,9 +28,9 @@ export interface IDateCreated {
  */
 export interface IDateModified {
 	/**
-	 * When this was last modified. Milliseconds since Unix epoch.
+	 * When this was last modified. ISO date string.
 	 */
-	dateModified?: number;
+	dateModified?: string;
 }
 
 /**
