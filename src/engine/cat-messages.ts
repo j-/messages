@@ -26,8 +26,8 @@ export async function executeCatMessages (action: IActionCatMessages): Promise<I
 		.where('node_cat.output_node_id', 'in', nodeIds)
 		.orderBy('message.date_created', 'desc')
 		.orderBy('message.timestamp', 'desc')
-		.groupByRaw('ifnull(message.tag, message.id)')
-		.distinct('message.id')
+		.groupBy('message.tag')
+		.groupBy('message.id')
 		.select([
 			'message.id',
 			'message.title',
@@ -40,10 +40,8 @@ export async function executeCatMessages (action: IActionCatMessages): Promise<I
 		])
 		.min('message.date_created as dateCreated')
 		.max('message.date_created as dateModified');
-	// Deserialize JSON data
 	return rows.map((row) => ({
 		...row,
-		data: JSON.parse(<string>row.data),
 		// Can do this in a raw query but would complicate the above
 		// when written using the query builder
 		dateModified: row.dateModified === row.dateCreated ? null : row.dateModified,

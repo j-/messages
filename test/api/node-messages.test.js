@@ -10,7 +10,7 @@ test.beforeEach(() => {
 	app.use(appNodes);
 });
 
-test('Can get messages from CatNode', async (t) => {
+test.skip('Can get messages from CatNode', async (t) => {
 	t.plan(2);
 	const res = await request(app).get('/99e0c2cb-0d46-49aa-afe2-898f0f5af337/messages');
 	t.is(res.status, 200);
@@ -56,7 +56,7 @@ test('Can get messages from CatNode', async (t) => {
 	});
 });
 
-test('Can get messages from multiple CatNodes', async (t) => {
+test.skip('Can get messages from multiple CatNodes', async (t) => {
 	t.plan(2);
 	const res = await request(app).get('/99e0c2cb-0d46-49aa-afe2-898f0f5af337+afa0319a-9391-4c27-a7fe-e50f226ce735/messages');
 	t.is(res.status, 200);
@@ -117,7 +117,7 @@ test('Can get messages from multiple CatNodes', async (t) => {
 	});
 });
 
-test('Can get messages from nodes in any order', async (t) => {
+test.skip('Can get messages from nodes in any order', async (t) => {
 	t.plan(2);
 	const res = await request(app).get('/afa0319a-9391-4c27-a7fe-e50f226ce735+99e0c2cb-0d46-49aa-afe2-898f0f5af337/messages');
 	t.is(res.status, 200);
@@ -178,7 +178,7 @@ test('Can get messages from nodes in any order', async (t) => {
 	});
 });
 
-test('Only the latest message with a particular tag is returned', async (t) => {
+test.skip('Only the latest message with a particular tag is returned', async (t) => {
 	t.plan(2);
 	const res = await request(app).get('/cd431717-6c53-4af1-a25a-e80bf611b79f/messages');
 	t.is(res.status, 200);
@@ -200,7 +200,7 @@ test('Only the latest message with a particular tag is returned', async (t) => {
 	});
 });
 
-test('Can get messages from nodes that depend on each other', async (t) => {
+test.skip('Can get messages from nodes that depend on each other', async (t) => {
 	t.plan(4);
 	const resA = await request(app).get('/b24558da-4867-4b9a-a8fb-930a8fdb25eb/messages');
 	t.is(resA.status, 200);

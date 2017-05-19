@@ -36,6 +36,10 @@ test('Can get details about multiple nodes', async (t) => {
 	t.deepEqual(res.body, {
 		"result": [
 			{
+				"id": "e92d26e5-d10a-41c7-9439-dbc7d01161e4",
+				"type": "ReadNode"
+			},
+			{
 				"id": "99e0c2cb-0d46-49aa-afe2-898f0f5af337",
 				"type": "CatNode",
 				"concatenates": [
@@ -50,10 +54,6 @@ test('Can get details about multiple nodes', async (t) => {
 				"concatenates": [
 					"8c5c1e89-b523-4e2d-93c4-274f1c4baa6f"
 				]
-			},
-			{
-				"id": "e92d26e5-d10a-41c7-9439-dbc7d01161e4",
-				"type": "ReadNode"
 			}
 		]
 	});

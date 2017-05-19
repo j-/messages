@@ -1,4 +1,5 @@
 exports.up = function (knex, Promise) {
+	console.log('up', __filename);
 	return knex.schema.createTable('node_messages', function (table) {
 		table.uuid('id').primary();
 		table.uuid('node_id');
@@ -9,5 +10,6 @@ exports.up = function (knex, Promise) {
 };
 
 exports.down = function (knex, Promise) {
+	console.log('down', __filename);
 	return knex.schema.dropTable('node_messages');
 };

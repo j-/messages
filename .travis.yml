@@ -2,7 +2,14 @@ language: node_js
 node_js:
   - "7"
   - "6"
+services:
+  - postgresql
+addons:
+  postgresql: "9.6"
+env:
+  - CONNECTION_STRING='postgres://postgres@localhost:5432/travis_ci_test'
 before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
   - npm run build
   - npm run latest
   - npm run seed
